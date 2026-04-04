@@ -1,0 +1,206 @@
+{
+  "last_updated": "2026-04-04 12:39:15.779413",
+  "summary": {
+    "total_asins": 5,
+    "active_alerts": 1,
+    "buy_box_win_rate": 50,
+    "avg_market_price": 388
+  },
+  "products": [
+    {
+      "asin": "demo123",
+      "name": "SKF",
+      "brand": "SKF",
+      "your_price": 639,
+      "buy_box_winner": "Competitor",
+      "status": "LOST",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 639
+        },
+        {
+          "seller": "Competitor",
+          "price": 619
+        },
+        {
+          "seller": "Other",
+          "price": 669
+        }
+      ],
+      "history": [
+        {
+          "time": "10:00",
+          "price": 659
+        },
+        {
+          "time": "10:10",
+          "price": 639
+        }
+      ],
+      "alerts": [
+        "Price competition detected"
+      ],
+      "insight": "Undercutting detected",
+      "recommended_price": 634,
+      "confidence": 80,
+      "win_probability": 75
+    },
+    {
+      "asin": "demo123",
+      "name": "Ball Bearing 6206-2RS1 Rubber Shield Bearing Deep Groove Ball Bearing Dimension 30x62x16",
+      "brand": "SKF",
+      "your_price": 294,
+      "buy_box_winner": "Competitor",
+      "status": "LOST",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 294
+        },
+        {
+          "seller": "Competitor",
+          "price": 274
+        },
+        {
+          "seller": "Other",
+          "price": 324
+        }
+      ],
+      "history": [
+        {
+          "time": "10:00",
+          "price": 314
+        },
+        {
+          "time": "10:10",
+          "price": 294
+        }
+      ],
+      "alerts": [
+        "Price competition detected"
+      ],
+      "insight": "Undercutting detected",
+      "recommended_price": 289,
+      "confidence": 80,
+      "win_probability": 75
+    },
+    {
+      "asin": "demo123",
+      "name": "SKF",
+      "brand": "SKF",
+      "your_price": 397,
+      "buy_box_winner": "Competitor",
+      "status": "LOST",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 397
+        },
+        {
+          "seller": "Competitor",
+          "price": 377
+        },
+        {
+          "seller": "Other",
+          "price": 427
+        }
+      ],
+      "history": [
+        {
+          "time": "10:00",
+          "price": 417
+        },
+        {
+          "time": "10:10",
+          "price": 397
+        }
+      ],
+      "alerts": [
+        "Price competition detected"
+      ],
+      "insight": "Undercutting detected",
+      "recommended_price": 392,
+      "confidence": 80,
+      "win_probability": 75
+    },
+    {
+      "asin": "demo123",
+      "name": "Ball Bearing 6302 Non Shield Bearing Deep Groove Ball Bearing Dimension 15x42x13",
+      "brand": "SKF",
+      "your_price": 245,
+      "buy_box_winner": "Competitor",
+      "status": "LOST",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 245
+        },
+        {
+          "seller": "Competitor",
+          "price": 225
+        },
+        {
+          "seller": "Other",
+          "price": 275
+        }
+      ],
+      "history": [
+        {
+          "time": "10:00",
+          "price": 265
+        },
+        {
+          "time": "10:10",
+          "price": 245
+        }
+      ],
+      "alerts": [
+        "Price competition detected"
+      ],
+      "insight": "Undercutting detected",
+      "recommended_price": 240,
+      "confidence": 80,
+      "win_probability": 75
+    },
+    {
+      "asin": "demo123",
+      "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17\u2026",
+      "brand": "SKF",
+      "your_price": 368,
+      "buy_box_winner": "Competitor",
+      "status": "LOST",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 368
+        },
+        {
+          "seller": "Competitor",
+          "price": 348
+        },
+        {
+          "seller": "Other",
+          "price": 398
+        }
+      ],
+      "history": [
+        {
+          "time": "10:00",
+          "price": 388
+        },
+        {
+          "time": "10:10",
+          "price": 368
+        }
+      ],
+      "alerts": [
+        "Price competition detected"
+      ],
+      "insight": "Undercutting detected",
+      "recommended_price": 363,
+      "confidence": 80,
+      "win_probability": 75
+    }
+  ]
+}
