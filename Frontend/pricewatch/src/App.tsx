@@ -5,39 +5,43 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DataProvider } from "@/context/DataContext";
 import AppSidebar from "@/components/AppSidebar";
-import DemoControls from "@/components/DemoControls";
+import Alerts from "@/pages/Alerts";
+import { DemoControls } from "@/components/DemoControls";
+import AIRecommender from "@/pages/AIRecommender";
 import Dashboard from "@/pages/Dashboard";
 import LivePrices from "@/pages/LivePrices";
-import AIRecommender from "@/pages/AIRecommender";
-import Alerts from "@/pages/Alerts";
-import NotFound from "./pages/NotFound.tsx";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <DataProvider>
-          <div className="flex min-h-screen w-full">
-            <AppSidebar />
-            <div className="ml-60 flex-1 flex flex-col">
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/live-prices" element={<LivePrices />} />
-                <Route path="/ai-recommender" element={<AIRecommender />} />
-                <Route path="/alerts" element={<Alerts />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <DataProvider>
+            <div className="flex min-h-screen w-full">
+              <AppSidebar />
+
+              <div className="ml-60 flex-1 flex flex-col p-4">
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/live-prices" element={<LivePrices />} />
+                  <Route path="/ai-recommender" element={<AIRecommender />} />
+                  <Route path="/alerts" element={<Alerts />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
             </div>
-          </div>
-          <DemoControls />
-        </DataProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+
+            <DemoControls />
+          </DataProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

@@ -24,10 +24,7 @@ def scrape_amazon():
     driver.get("https://www.amazon.in/s?k=skf+bearing")
     time.sleep(5)
 
-    products = driver.find_elements(
-        By.CSS_SELECTOR,
-        "div[data-component-type='s-search-result']"
-    )
+    products = driver.find_elements(By.CSS_SELECTOR, "div[data-component-type='s-search-result']")
 
     data = []
 
@@ -37,16 +34,13 @@ def scrape_amazon():
             title = product.find_element(By.TAG_NAME, "h2").text
             if len(title) < 10:
                 continue
-        except Exception:
+        except:
             continue
 
         try:
-            price_element = product.find_element(
-                By.CLASS_NAME,
-                "a-price-whole"
-            )
-            price = int(price_element.text.replace(",", ""))
-        except Exception:
+            price = product.find_element(By.CLASS_NAME, "a-price-whole").text
+            price = int(price.replace(",", ""))
+        except:
             continue
 
         data.append({
@@ -96,9 +90,7 @@ def scrape_amazon():
         ]
 
         # ------------------ PRICE ANALYSIS ------------------
-        competitor_price = min(
-            p["price"] for p in sellers if p["seller"] != "You"
-        )
+        competitor_price = min(p["price"] for p in sellers if p["seller"] != "You")
         price_gap = your_price - competitor_price
 
         # ------------------ STATUS ------------------
@@ -126,10 +118,10 @@ def scrape_amazon():
             alerts.append("💸 Price too low (profit risk)")
 
         # ------------------ RECOMMENDATION ------------------
-        recommended_price = (
-            your_price - 2 if status == "WIN"
-            else competitor_price - 1
-        )
+        if status == "WIN":
+            recommended_price = your_price - 2
+        else:
+            recommended_price = competitor_price - 1
 
         # ------------------ WIN PROBABILITY ------------------
         if status == "WIN":
@@ -170,15 +162,8 @@ def scrape_amazon():
             "price_gap": price_gap,
             "market_position": market_position,
             "reason": "Lowest price wins Buy Box",
-            "strategy": (
-                "Maintain price" if status == "WIN"
-                else "Reduce price"
-            ),
-            "impact": (
-                "Higher visibility & conversions"
-                if status == "WIN"
-                else "Loss of sales"
-            )
+            "strategy": "Maintain price" if status == "WIN" else "Reduce price",
+            "impact": "Higher visibility & conversions" if status == "WIN" else "Loss of sales"
         }
 
         output["products"].append(product_obj)
@@ -188,16 +173,9 @@ def scrape_amazon():
 
     output["summary"] = {
         "total_asins": total,
-        "active_alerts": sum(
-            len(p["alerts"]) for p in output["products"]
-        ),
-        "buy_box_win_rate": (
-            int((win_count / total) * 100) if total > 0 else 0
-        ),
-        "avg_market_price": (
-            sum(p["your_price"] for p in output["products"]) // total
-            if total > 0 else 0
-        )
+        "active_alerts": sum(len(p["alerts"]) for p in output["products"]),
+        "buy_box_win_rate": int((win_count / total) * 100) if total > 0 else 0,
+        "avg_market_price": sum(p["your_price"] for p in output["products"]) // total if total > 0 else 0
     }
 
     # ------------------ SAVE FILE ------------------
@@ -212,11 +190,12 @@ def scrape_amazon():
 
     print("\n✅ JSON updated successfully!")
 
+    # Close browser
     driver.quit()
 
     return output
 
 
-# ------------------ RUN ------------------
+# ------------------ RUN ONCE ------------------
 if __name__ == "__main__":
     scrape_amazon()
