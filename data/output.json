@@ -1,21 +1,58 @@
 {
-  "last_updated": "2026-04-04 22:41:51.200666",
+  "last_updated": "2026-04-05 01:45:40.357284",
   "summary": {
     "total_asins": 4,
-    "active_alerts": 12,
+    "active_alerts": 8,
     "buy_box_win_rate": 50,
-    "avg_market_price": 276,
-    "products_winning": 2,
-    "products_losing": 2
+    "avg_market_price": 256
   },
   "products": [
     {
       "asin": "demo0",
+      "name": "6302 Deep Groove Ball Bearing (15x42x13 mm, Double Sealed) | High Speed, Low Noise, Long Life | Motor, Fan, Pump, Scooter, Industrial Use, 2 Pieces",
+      "brand": "SKF",
+      "your_price": 287,
+      "buy_box_winner": "You",
+      "status": "WIN",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 287
+        },
+        {
+          "seller": "Seller1",
+          "price": 297
+        },
+        {
+          "seller": "Seller2",
+          "price": 307
+        },
+        {
+          "seller": "Seller3",
+          "price": 292
+        }
+      ],
+      "alerts": [
+        "\u26a0\ufe0f Very close competition",
+        "\ud83d\udd25 High competition"
+      ],
+      "insight": "You are \u20b95 cheaper than competitors.",
+      "recommended_price": 285,
+      "confidence": 85,
+      "win_probability": 85,
+      "price_gap": -5,
+      "market_position": "Competitive",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Maintain price",
+      "impact": "Higher visibility & conversions"
+    },
+    {
+      "asin": "demo1",
       "name": "Ball Bearing 6206-2RS1 Rubber Shield Bearing Deep Groove Ball Bearing Dimension 30x62x16",
       "brand": "SKF",
       "your_price": 294,
-      "buy_box_winner": "You",
-      "status": "WIN",
+      "buy_box_winner": "Competitor",
+      "status": "LOSE",
       "prices": [
         {
           "seller": "You",
@@ -23,39 +60,38 @@
         },
         {
           "seller": "Seller1",
-          "price": 304
+          "price": 279
         },
         {
           "seller": "Seller2",
-          "price": 314
+          "price": 304
         },
         {
           "seller": "Seller3",
-          "price": 299
+          "price": 289
         }
       ],
       "alerts": [
-        "[WATCH] Seller3 only Rs.5 behind - monitor closely",
-        "[WIN] Winning Buy Box - Maintain position",
-        "[INFO] High competition - 3 sellers active on this ASIN"
+        "\u26a0\ufe0f Undercut by \u20b915",
+        "\ud83d\udd25 High competition"
       ],
-      "insight": "You are Rs.5 cheaper than nearest competitor. Strong Buy Box position.",
-      "recommended_price": 292,
+      "insight": "Competitor is cheaper by \u20b915.",
+      "recommended_price": 278,
       "confidence": 85,
-      "win_probability": 85,
-      "price_gap": -5,
-      "market_position": "Competitive",
+      "win_probability": 60,
+      "price_gap": 15,
+      "market_position": "Close Competition",
       "reason": "Lowest price wins Buy Box",
-      "strategy": "Maintain current price",
-      "impact": "Higher visibility and conversions"
+      "strategy": "Reduce price",
+      "impact": "Loss of sales"
     },
     {
-      "asin": "demo1",
+      "asin": "demo2",
       "name": "Ball Bearing 6302 Non Shield Bearing Deep Groove Ball Bearing Dimension 15x42x13",
       "brand": "SKF",
       "your_price": 245,
-      "buy_box_winner": "Seller1",
-      "status": "LOSE",
+      "buy_box_winner": "You",
+      "status": "WIN",
       "prices": [
         {
           "seller": "You",
@@ -63,78 +99,37 @@
         },
         {
           "seller": "Seller1",
-          "price": 230
-        },
-        {
-          "seller": "Seller2",
           "price": 255
         },
         {
-          "seller": "Seller3",
-          "price": 240
-        }
-      ],
-      "alerts": [
-        "[ALERT] Lost Buy Box! Seller1 at Rs.230 (Rs.15 cheaper than you)",
-        "[WARNING] Undercut by Rs.15 - Immediate action required",
-        "[INFO] High competition - 3 sellers active on this ASIN"
-      ],
-      "insight": "Seller1 is undercutting you by Rs.15. Drop to Rs.229 to reclaim Buy Box.",
-      "recommended_price": 229,
-      "confidence": 85,
-      "win_probability": 65,
-      "price_gap": 15,
-      "market_position": "Close Competition",
-      "reason": "Lowest price wins Buy Box",
-      "strategy": "Reduce price to Rs.229",
-      "impact": "Regain Buy Box and recover lost sales"
-    },
-    {
-      "asin": "demo2",
-      "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17…",
-      "brand": "SKF",
-      "your_price": 368,
-      "buy_box_winner": "You",
-      "status": "WIN",
-      "prices": [
-        {
-          "seller": "You",
-          "price": 368
-        },
-        {
-          "seller": "Seller1",
-          "price": 378
-        },
-        {
           "seller": "Seller2",
-          "price": 388
+          "price": 265
         },
         {
           "seller": "Seller3",
-          "price": 373
+          "price": 250
         }
       ],
       "alerts": [
-        "[WATCH] Seller3 only Rs.5 behind - monitor closely",
-        "[WIN] Winning Buy Box - Maintain position",
-        "[INFO] High competition - 3 sellers active on this ASIN"
+        "\u26a0\ufe0f Very close competition",
+        "\ud83d\udd25 High competition"
       ],
-      "insight": "You are Rs.5 cheaper than nearest competitor. Strong Buy Box position.",
-      "recommended_price": 366,
+      "insight": "You are \u20b95 cheaper than competitors.",
+      "recommended_price": 243,
       "confidence": 85,
       "win_probability": 85,
       "price_gap": -5,
       "market_position": "Competitive",
       "reason": "Lowest price wins Buy Box",
-      "strategy": "Maintain current price",
-      "impact": "Higher visibility and conversions"
+      "strategy": "Maintain price",
+      "impact": "Higher visibility & conversions"
     },
     {
       "asin": "demo3",
       "name": "Pillow Ball Bearing, UCP205",
       "brand": "SKF",
       "your_price": 200,
-      "buy_box_winner": "Seller1",
+      "buy_box_winner": "Competitor",
       "status": "LOSE",
       "prices": [
         {
@@ -155,19 +150,18 @@
         }
       ],
       "alerts": [
-        "[ALERT] Lost Buy Box! Seller1 at Rs.185 (Rs.15 cheaper than you)",
-        "[WARNING] Undercut by Rs.15 - Immediate action required",
-        "[INFO] High competition - 3 sellers active on this ASIN"
+        "\u26a0\ufe0f Undercut by \u20b915",
+        "\ud83d\udd25 High competition"
       ],
-      "insight": "Seller1 is undercutting you by Rs.15. Drop to Rs.184 to reclaim Buy Box.",
+      "insight": "Competitor is cheaper by \u20b915.",
       "recommended_price": 184,
       "confidence": 85,
-      "win_probability": 65,
+      "win_probability": 60,
       "price_gap": 15,
       "market_position": "Close Competition",
       "reason": "Lowest price wins Buy Box",
-      "strategy": "Reduce price to Rs.184",
-      "impact": "Regain Buy Box and recover lost sales"
+      "strategy": "Reduce price",
+      "impact": "Loss of sales"
     }
   ]
 }
