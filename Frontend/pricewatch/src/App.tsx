@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DataProvider } from "@/context/DataContext";
 import AppSidebar from "@/components/AppSidebar";
+import Alerts from "@/pages/Alerts";
 import { DemoControls } from "@/components/DemoControls";
 import AIRecommender from "@/pages/AIRecommender";
 import Dashboard from "@/pages/Dashboard";
@@ -29,6 +30,7 @@ const App = () => {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/live-prices" element={<LivePrices />} />
                   <Route path="/ai-recommender" element={<AIRecommender />} />
+                  <Route path="/alerts" element={<Alerts />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
