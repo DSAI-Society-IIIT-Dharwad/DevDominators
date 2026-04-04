@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-04-04 17:46:30.699742",
+  "last_updated": "2026-04-04 20:27:00.513738",
   "summary": {
     "total_asins": 4,
     "active_alerts": 8,
     "buy_box_win_rate": 50,
-    "avg_market_price": 276
+    "avg_market_price": 396
   },
   "products": [
     {
@@ -87,27 +87,27 @@
     },
     {
       "asin": "demo2",
-      "name": "Pillow Ball Bearing, UCP205",
+      "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17\u2026",
       "brand": "SKF",
-      "your_price": 200,
+      "your_price": 368,
       "buy_box_winner": "You",
       "status": "WIN",
       "prices": [
         {
           "seller": "You",
-          "price": 200
+          "price": 368
         },
         {
           "seller": "Seller1",
-          "price": 210
+          "price": 378
         },
         {
           "seller": "Seller2",
-          "price": 220
+          "price": 388
         },
         {
           "seller": "Seller3",
-          "price": 205
+          "price": 373
         }
       ],
       "alerts": [
@@ -115,7 +115,7 @@
         "\ud83d\udd25 High competition"
       ],
       "insight": "You are \u20b95 cheaper than competitors.",
-      "recommended_price": 198,
+      "recommended_price": 366,
       "confidence": 85,
       "win_probability": 85,
       "price_gap": -5,
@@ -126,27 +126,27 @@
     },
     {
       "asin": "demo3",
-      "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17\u2026",
+      "name": "Ball Bearing 6208-2RS1 Rubber Shield Bearing Deep Groove Ball Bearing Dimension 40x80x18",
       "brand": "SKF",
-      "your_price": 368,
+      "your_price": 678,
       "buy_box_winner": "Competitor",
       "status": "LOSE",
       "prices": [
         {
           "seller": "You",
-          "price": 368
+          "price": 678
         },
         {
           "seller": "Seller1",
-          "price": 353
+          "price": 663
         },
         {
           "seller": "Seller2",
-          "price": 378
+          "price": 688
         },
         {
           "seller": "Seller3",
-          "price": 363
+          "price": 673
         }
       ],
       "alerts": [
@@ -154,7 +154,7 @@
         "\ud83d\udd25 High competition"
       ],
       "insight": "Competitor is cheaper by \u20b915.",
-      "recommended_price": 352,
+      "recommended_price": 662,
       "confidence": 85,
       "win_probability": 60,
       "price_gap": 15,
