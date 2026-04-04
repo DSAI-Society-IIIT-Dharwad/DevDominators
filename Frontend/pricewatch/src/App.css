@@ -4,7 +4,17 @@
   padding: 2rem;
   text-align: center;
 }
+body{
 
+background:
+radial-gradient(circle at top,
+#020617,
+#020617,
+#000000);
+
+color:white;
+
+}
 .logo {
   height: 6em;
   padding: 1.5em;
