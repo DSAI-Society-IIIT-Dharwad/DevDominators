@@ -1,56 +1,106 @@
-import { useState } from 'react';
-import { useData } from '@/context/DataContext';
-import type { PriceData } from '@/types/data';
+// src/components/DemoControls.tsx
+// REPLACE ENTIRE FILE
 
-export default function DemoControls() {
-  const { data, setData, resetDemo } = useData();
-  const [status, setStatus] = useState('');
+import { useState } from "react";
+import { useData } from "../context/DataContext";
 
-  const simulateAlert = () => {
-    if (!data) return;
-    const newData: PriceData = JSON.parse(JSON.stringify(data));
-    const win = newData.products.find(p => p.status === 'WIN');
-    if (!win) { setStatus('No WIN products to flip'); return; }
+export function DemoControls() {
+  const { triggerAlert, resetDemo } = useData();
+  const [status, setStatus]   = useState("");
+  const [loading, setLoading] = useState(false);
 
-    win.status = 'LOSE';
-    win.buy_box_winner = 'Seller1';
-    win.prices[1].price = win.your_price - 20;
-    win.alerts.unshift(`[ALERT] Competitor just dropped to Rs.${win.your_price - 20}! You lost Buy Box!`);
-    win.strategy = 'Reduce price immediately';
-    win.win_probability = 35;
-    win.price_gap = 20;
-    win.market_position = 'Close Competition';
-
-    newData.summary.active_alerts += 3;
-    newData.summary.buy_box_win_rate = Math.max(0, newData.summary.buy_box_win_rate - 25);
-    newData.summary.products_losing += 1;
-    newData.summary.products_winning = Math.max(0, newData.summary.products_winning - 1);
-
-    setData(newData);
-    setStatus(`⚡ ${win.name.slice(0, 30)}... flipped to LOSE`);
+  const handleTrigger = async () => {
+    setLoading(true);
+    setStatus("Simulating...");
+    await triggerAlert();
+    setStatus("Alert triggered! Check dashboard.");
+    setLoading(false);
+    setTimeout(() => setStatus(""), 4000);
   };
 
-  const handleReset = () => {
-    resetDemo();
-    setStatus('✅ Demo reset to original data');
+  const handleReset = async () => {
+    setLoading(true);
+    setStatus("Resetting...");
+    await resetDemo();
+    setStatus("Reset complete!");
+    setLoading(false);
+    setTimeout(() => setStatus(""), 3000);
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] glass-card p-4 min-w-[220px] space-y-3">
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">🎮 Demo Controls</p>
+    <div style={{
+      position:     "fixed",
+      bottom:       "24px",
+      right:        "24px",
+      background:   "#111827",
+      border:       "1px solid #374151",
+      borderRadius: "12px",
+      padding:      "16px",
+      zIndex:       9999,
+      minWidth:     "220px",
+      boxShadow:    "0 4px 24px rgba(0,0,0,0.5)"
+    }}>
+      <p style={{
+        color:          "#6B7280",
+        fontSize:       "10px",
+        textTransform:  "uppercase",
+        letterSpacing:  "1px",
+        marginBottom:   "10px",
+        fontWeight:     "600"
+      }}>
+        🎮 Demo Controls
+      </p>
+
       <button
-        onClick={simulateAlert}
-        className="w-full rounded-lg bg-destructive px-3 py-2 text-xs font-semibold text-destructive-foreground transition hover:opacity-90"
-      >
+        onClick={handleTrigger}
+        disabled={loading}
+        style={{
+          display:       "block",
+          width:         "100%",
+          background:    loading ? "#7f1d1d" : "#EF4444",
+          color:         "white",
+          padding:       "9px 0",
+          borderRadius:  "8px",
+          border:        "none",
+          cursor:        loading ? "wait" : "pointer",
+          marginBottom:  "8px",
+          fontWeight:    "bold",
+          fontSize:      "13px",
+          transition:    "background 0.2s"
+        }}>
         🚨 Simulate Competitor Alert
       </button>
+
       <button
         onClick={handleReset}
-        className="w-full rounded-lg bg-success px-3 py-2 text-xs font-semibold text-success-foreground transition hover:opacity-90"
-      >
+        disabled={loading}
+        style={{
+          display:      "block",
+          width:        "100%",
+          background:   loading ? "#064e3b" : "#10B981",
+          color:        "white",
+          padding:      "9px 0",
+          borderRadius: "8px",
+          border:       "none",
+          cursor:       loading ? "wait" : "pointer",
+          fontWeight:   "bold",
+          fontSize:     "13px",
+          transition:   "background 0.2s"
+        }}>
         ✅ Reset Demo
       </button>
-      {status && <p className="text-[10px] text-muted-foreground">{status}</p>}
+
+      {status && (
+        <p style={{
+          color:      "#F9FAFB",
+          fontSize:   "11px",
+          marginTop:  "10px",
+          lineHeight: "1.5",
+          textAlign:  "center"
+        }}>
+          {status}
+        </p>
+      )}
     </div>
   );
 }

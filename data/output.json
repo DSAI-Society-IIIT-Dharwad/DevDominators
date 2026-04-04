@@ -1,37 +1,37 @@
 {
-  "last_updated": "2026-04-04 18:09:11.236551",
+  "last_updated": "2026-04-04 22:41:51.200666",
   "summary": {
     "total_asins": 4,
     "active_alerts": 12,
     "buy_box_win_rate": 50,
-    "avg_market_price": 256,
+    "avg_market_price": 276,
     "products_winning": 2,
     "products_losing": 2
   },
   "products": [
     {
       "asin": "demo0",
-      "name": "6302 Deep Groove Ball Bearing (15x42x13 mm, Double Sealed) | High Speed, Low Noise, Long Life | Motor, Fan, Pump, Scooter, Industrial Use, 2 Pieces",
+      "name": "Ball Bearing 6206-2RS1 Rubber Shield Bearing Deep Groove Ball Bearing Dimension 30x62x16",
       "brand": "SKF",
-      "your_price": 287,
+      "your_price": 294,
       "buy_box_winner": "You",
       "status": "WIN",
       "prices": [
         {
           "seller": "You",
-          "price": 287
+          "price": 294
         },
         {
           "seller": "Seller1",
-          "price": 297
+          "price": 304
         },
         {
           "seller": "Seller2",
-          "price": 307
+          "price": 314
         },
         {
           "seller": "Seller3",
-          "price": 292
+          "price": 299
         }
       ],
       "alerts": [
@@ -40,7 +40,7 @@
         "[INFO] High competition - 3 sellers active on this ASIN"
       ],
       "insight": "You are Rs.5 cheaper than nearest competitor. Strong Buy Box position.",
-      "recommended_price": 285,
+      "recommended_price": 292,
       "confidence": 85,
       "win_probability": 85,
       "price_gap": -5,
@@ -51,51 +51,11 @@
     },
     {
       "asin": "demo1",
-      "name": "Ball Bearing 6206-2RS1 Rubber Shield Bearing Deep Groove Ball Bearing Dimension 30x62x16",
-      "brand": "SKF",
-      "your_price": 294,
-      "buy_box_winner": "Seller1",
-      "status": "LOSE",
-      "prices": [
-        {
-          "seller": "You",
-          "price": 294
-        },
-        {
-          "seller": "Seller1",
-          "price": 279
-        },
-        {
-          "seller": "Seller2",
-          "price": 304
-        },
-        {
-          "seller": "Seller3",
-          "price": 289
-        }
-      ],
-      "alerts": [
-        "[ALERT] Lost Buy Box! Seller1 at Rs.279 (Rs.15 cheaper than you)",
-        "[WARNING] Undercut by Rs.15 - Immediate action required",
-        "[INFO] High competition - 3 sellers active on this ASIN"
-      ],
-      "insight": "Seller1 is undercutting you by Rs.15. Drop to Rs.278 to reclaim Buy Box.",
-      "recommended_price": 278,
-      "confidence": 85,
-      "win_probability": 65,
-      "price_gap": 15,
-      "market_position": "Close Competition",
-      "reason": "Lowest price wins Buy Box",
-      "strategy": "Reduce price to Rs.278",
-      "impact": "Regain Buy Box and recover lost sales"
-    },
-    {
-      "asin": "demo2",
       "name": "Ball Bearing 6302 Non Shield Bearing Deep Groove Ball Bearing Dimension 15x42x13",
       "brand": "SKF",
       "your_price": 245,
-      "buy_box_winner": "You",
-      "status": "WIN",
+      "buy_box_winner": "Seller1",
+      "status": "LOSE",
       "prices": [
         {
           "seller": "You",
@@ -103,15 +63,55 @@
         },
         {
           "seller": "Seller1",
-          "price": 255
+          "price": 230
         },
         {
           "seller": "Seller2",
-          "price": 265
+          "price": 255
         },
         {
           "seller": "Seller3",
-          "price": 250
+          "price": 240
+        }
+      ],
+      "alerts": [
+        "[ALERT] Lost Buy Box! Seller1 at Rs.230 (Rs.15 cheaper than you)",
+        "[WARNING] Undercut by Rs.15 - Immediate action required",
+        "[INFO] High competition - 3 sellers active on this ASIN"
+      ],
+      "insight": "Seller1 is undercutting you by Rs.15. Drop to Rs.229 to reclaim Buy Box.",
+      "recommended_price": 229,
+      "confidence": 85,
+      "win_probability": 65,
+      "price_gap": 15,
+      "market_position": "Close Competition",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Reduce price to Rs.229",
+      "impact": "Regain Buy Box and recover lost sales"
+    },
+    {
+      "asin": "demo2",
+      "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17…",
+      "brand": "SKF",
+      "your_price": 368,
+      "buy_box_winner": "You",
+      "status": "WIN",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 368
+        },
+        {
+          "seller": "Seller1",
+          "price": 378
+        },
+        {
+          "seller": "Seller2",
+          "price": 388
+        },
+        {
+          "seller": "Seller3",
+          "price": 373
         }
       ],
       "alerts": [
@@ -120,7 +120,7 @@
         "[INFO] High competition - 3 sellers active on this ASIN"
       ],
       "insight": "You are Rs.5 cheaper than nearest competitor. Strong Buy Box position.",
-      "recommended_price": 243,
+      "recommended_price": 366,
       "confidence": 85,
       "win_probability": 85,
       "price_gap": -5,
