@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-04-04 18:09:11.236551",
+  "last_updated": "2026-04-04 18:51:48.802222",
   "summary": {
-    "total_asins": 4,
-    "active_alerts": 12,
-    "buy_box_win_rate": 50,
-    "avg_market_price": 256,
-    "products_winning": 2,
+    "total_asins": 5,
+    "active_alerts": 15,
+    "buy_box_win_rate": 60,
+    "avg_market_price": 278,
+    "products_winning": 3,
     "products_losing": 2
   },
   "products": [
@@ -168,6 +168,46 @@
       "reason": "Lowest price wins Buy Box",
       "strategy": "Reduce price to Rs.184",
       "impact": "Regain Buy Box and recover lost sales"
+    },
+    {
+      "asin": "demo4",
+      "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17…",
+      "brand": "SKF",
+      "your_price": 368,
+      "buy_box_winner": "You",
+      "status": "WIN",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 368
+        },
+        {
+          "seller": "Seller1",
+          "price": 378
+        },
+        {
+          "seller": "Seller2",
+          "price": 388
+        },
+        {
+          "seller": "Seller3",
+          "price": 373
+        }
+      ],
+      "alerts": [
+        "[WATCH] Seller3 only Rs.5 behind - monitor closely",
+        "[WIN] Winning Buy Box - Maintain position",
+        "[INFO] High competition - 3 sellers active on this ASIN"
+      ],
+      "insight": "You are Rs.5 cheaper than nearest competitor. Strong Buy Box position.",
+      "recommended_price": 366,
+      "confidence": 85,
+      "win_probability": 85,
+      "price_gap": -5,
+      "market_position": "Competitive",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Maintain current price",
+      "impact": "Higher visibility and conversions"
     }
   ]
 }
