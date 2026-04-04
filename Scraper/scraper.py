@@ -5,94 +5,197 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
 from datetime import datetime
-from pathlib import Path
-options = webdriver.ChromeOptions()
-options.add_argument("--disable-blink-features=AutomationControlled")
+import os
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-driver.get("https://www.amazon.in/s?k=skf+bearing")
+def scrape_amazon():
 
-time.sleep(5)
+    # ------------------ SETUP ------------------
+    options = webdriver.ChromeOptions()
+    options.add_argument("--disable-blink-features=AutomationControlled")
 
-# 🔽 FIND PRODUCTS
-products = driver.find_elements(By.CSS_SELECTOR, "div[data-component-type='s-search-result']")
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=options
+    )
 
-data = []
+    print("Opening Amazon...")
 
-# 🔽 LOOP THROUGH PRODUCTS
-for product in products[:5]:  # take first 5
-    try:
-        title = product.find_element(By.TAG_NAME, "h2").text
-    except:
-        title = "No title"
+    driver.get("https://www.amazon.in/s?k=skf+bearing")
+    time.sleep(5)
 
-    try:
-        price = product.find_element(By.CLASS_NAME, "a-price-whole").text
-        price = int(price.replace(",", ""))
-    except:
-        price = 9999
+    products = driver.find_elements(By.CSS_SELECTOR, "div[data-component-type='s-search-result']")
 
-    data.append({
-        "title": title,
-        "price": price
-    })
+    data = []
 
-# 🔽 PRINT DATA
-print("\n--- SCRAPED DATA ---")
-for item in data:
-    print(item)
+    # ------------------ SCRAPE ------------------
+    for product in products[:6]:
+        try:
+            title = product.find_element(By.TAG_NAME, "h2").text
+            if len(title) < 10:
+                continue
+        except:
+            continue
 
-output = {
-    "last_updated": str(datetime.now()),
-    "summary": {},
-    "products": []
-}
+        try:
+            price = product.find_element(By.CLASS_NAME, "a-price-whole").text
+            price = int(price.replace(",", ""))
+        except:
+            continue
 
-for item in data:
-    product = {
-        "asin": "demo123",
-        "name": item["title"],
-        "brand": "SKF",
-        "your_price": item["price"],
-        "buy_box_winner": "Competitor",
-        "status": "LOST",
+        data.append({
+            "title": title,
+            "price": price
+        })
 
-        "prices": [
-            {"seller": "You", "price": item["price"]},
-            {"seller": "Competitor", "price": item["price"] - 20},
-            {"seller": "Other", "price": item["price"] + 30}
-        ],
+    print("\n--- SCRAPED DATA ---")
+    for item in data:
+        print(item)
 
-        "history": [
-            {"time": "10:00", "price": item["price"] + 20},
-            {"time": "10:10", "price": item["price"]}
-        ],
-
-        "alerts": ["Price competition detected"],
-        "insight": "Undercutting detected",
-
-        "recommended_price": item["price"] - 5,
-        "confidence": 80,
-        "win_probability": 75
+    # ------------------ JSON STRUCTURE ------------------
+    output = {
+        "last_updated": str(datetime.now()),
+        "summary": {},
+        "products": []
     }
 
-    output["products"].append(product)
+    win_count = 0
 
-# 🔽 ADD SUMMARY
-output["summary"] = {
-    "total_asins": len(output["products"]),
-    "active_alerts": 1,
-    "buy_box_win_rate": 50,
-    "avg_market_price": sum([p["your_price"] for p in output["products"]]) // len(output["products"])
-}
+    # ------------------ PROCESS EACH PRODUCT ------------------
+    for i, item in enumerate(data):
 
-# 🔽 SAVE FILE
-output_path = Path(__file__).resolve().parent.parent / "data" / "output.json"
-output_path.parent.mkdir(parents=True, exist_ok=True)
+        your_price = item["price"]
 
-with open(output_path, "w", encoding="utf-8") as f:
-    json.dump(output, f, indent=2)
+        # 🔥 SIMULATED COMPETITION
+        if i % 2 == 0:
+            seller_prices = [
+                your_price,
+                your_price + 10,
+                your_price + 20,
+                your_price + 5
+            ]
+        else:
+            seller_prices = [
+                your_price,
+                your_price - 15,
+                your_price + 10,
+                your_price - 5
+            ]
 
-print(f"\n✅ JSON file created at {output_path}")
-driver.quit()
+        sellers = [
+            {"seller": "You", "price": seller_prices[0]},
+            {"seller": "Seller1", "price": seller_prices[1]},
+            {"seller": "Seller2", "price": seller_prices[2]},
+            {"seller": "Seller3", "price": seller_prices[3]}
+        ]
+
+        # ------------------ PRICE ANALYSIS ------------------
+        competitor_price = min(p["price"] for p in sellers if p["seller"] != "You")
+        price_gap = your_price - competitor_price
+
+        # ------------------ STATUS ------------------
+        if your_price <= competitor_price:
+            status = "WIN"
+            buy_box_winner = "You"
+            win_count += 1
+        else:
+            status = "LOSE"
+            buy_box_winner = "Competitor"
+
+        # ------------------ ALERT SYSTEM ------------------
+        alerts = []
+
+        if status == "LOSE":
+            alerts.append(f"⚠️ Undercut by ₹{abs(price_gap)}")
+
+        if abs(price_gap) <= 5:
+            alerts.append("⚠️ Very close competition")
+
+        if len(sellers) >= 4:
+            alerts.append("🔥 High competition")
+
+        if your_price < competitor_price - 20:
+            alerts.append("💸 Price too low (profit risk)")
+
+        # ------------------ RECOMMENDATION ------------------
+        if status == "WIN":
+            recommended_price = your_price - 2
+        else:
+            recommended_price = competitor_price - 1
+
+        # ------------------ WIN PROBABILITY ------------------
+        if status == "WIN":
+            win_probability = 85
+        elif abs(price_gap) < 20:
+            win_probability = 60
+        else:
+            win_probability = 30
+
+        # ------------------ INSIGHT ------------------
+        if status == "WIN":
+            insight = f"You are ₹{abs(price_gap)} cheaper than competitors."
+        else:
+            insight = f"Competitor is cheaper by ₹{abs(price_gap)}."
+
+        # ------------------ MARKET POSITION ------------------
+        if status == "WIN":
+            market_position = "Competitive"
+        elif abs(price_gap) < 20:
+            market_position = "Close Competition"
+        else:
+            market_position = "Expensive"
+
+        # ------------------ PRODUCT OBJECT ------------------
+        product_obj = {
+            "asin": f"demo{i}",
+            "name": item["title"],
+            "brand": "SKF",
+            "your_price": your_price,
+            "buy_box_winner": buy_box_winner,
+            "status": status,
+            "prices": sellers,
+            "alerts": alerts,
+            "insight": insight,
+            "recommended_price": recommended_price,
+            "confidence": 85,
+            "win_probability": win_probability,
+            "price_gap": price_gap,
+            "market_position": market_position,
+            "reason": "Lowest price wins Buy Box",
+            "strategy": "Maintain price" if status == "WIN" else "Reduce price",
+            "impact": "Higher visibility & conversions" if status == "WIN" else "Loss of sales"
+        }
+
+        output["products"].append(product_obj)
+
+    # ------------------ SUMMARY ------------------
+    total = len(output["products"])
+
+    output["summary"] = {
+        "total_asins": total,
+        "active_alerts": sum(len(p["alerts"]) for p in output["products"]),
+        "buy_box_win_rate": int((win_count / total) * 100) if total > 0 else 0,
+        "avg_market_price": sum(p["your_price"] for p in output["products"]) // total if total > 0 else 0
+    }
+
+    # ------------------ SAVE FILE ------------------
+    base_path = os.path.dirname(os.path.dirname(__file__))
+    data_folder = os.path.join(base_path, "data")
+    os.makedirs(data_folder, exist_ok=True)
+
+    file_path = os.path.join(data_folder, "output.json")
+
+    with open(file_path, "w") as f:
+        json.dump(output, f, indent=2)
+
+    print("\n✅ JSON updated successfully!")
+
+    # Close browser
+    driver.quit()
+
+    return output
+
+
+# ------------------ RUN ONCE ------------------
+if __name__ == "__main__":
+    scrape_amazon()

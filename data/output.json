@@ -1,206 +1,167 @@
 {
-  "last_updated": "2026-04-04 12:39:15.779413",
+  "last_updated": "2026-04-04 17:46:30.699742",
   "summary": {
-    "total_asins": 5,
-    "active_alerts": 1,
+    "total_asins": 4,
+    "active_alerts": 8,
     "buy_box_win_rate": 50,
-    "avg_market_price": 388
+    "avg_market_price": 276
   },
   "products": [
     {
-      "asin": "demo123",
-      "name": "SKF",
-      "brand": "SKF",
-      "your_price": 639,
-      "buy_box_winner": "Competitor",
-      "status": "LOST",
-      "prices": [
-        {
-          "seller": "You",
-          "price": 639
-        },
-        {
-          "seller": "Competitor",
-          "price": 619
-        },
-        {
-          "seller": "Other",
-          "price": 669
-        }
-      ],
-      "history": [
-        {
-          "time": "10:00",
-          "price": 659
-        },
-        {
-          "time": "10:10",
-          "price": 639
-        }
-      ],
-      "alerts": [
-        "Price competition detected"
-      ],
-      "insight": "Undercutting detected",
-      "recommended_price": 634,
-      "confidence": 80,
-      "win_probability": 75
-    },
-    {
-      "asin": "demo123",
+      "asin": "demo0",
       "name": "Ball Bearing 6206-2RS1 Rubber Shield Bearing Deep Groove Ball Bearing Dimension 30x62x16",
       "brand": "SKF",
       "your_price": 294,
-      "buy_box_winner": "Competitor",
-      "status": "LOST",
+      "buy_box_winner": "You",
+      "status": "WIN",
       "prices": [
         {
           "seller": "You",
           "price": 294
         },
         {
-          "seller": "Competitor",
-          "price": 274
+          "seller": "Seller1",
+          "price": 304
         },
         {
-          "seller": "Other",
-          "price": 324
-        }
-      ],
-      "history": [
-        {
-          "time": "10:00",
+          "seller": "Seller2",
           "price": 314
         },
         {
-          "time": "10:10",
-          "price": 294
+          "seller": "Seller3",
+          "price": 299
         }
       ],
       "alerts": [
-        "Price competition detected"
+        "\u26a0\ufe0f Very close competition",
+        "\ud83d\udd25 High competition"
       ],
-      "insight": "Undercutting detected",
-      "recommended_price": 289,
-      "confidence": 80,
-      "win_probability": 75
+      "insight": "You are \u20b95 cheaper than competitors.",
+      "recommended_price": 292,
+      "confidence": 85,
+      "win_probability": 85,
+      "price_gap": -5,
+      "market_position": "Competitive",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Maintain price",
+      "impact": "Higher visibility & conversions"
     },
     {
-      "asin": "demo123",
-      "name": "SKF",
-      "brand": "SKF",
-      "your_price": 397,
-      "buy_box_winner": "Competitor",
-      "status": "LOST",
-      "prices": [
-        {
-          "seller": "You",
-          "price": 397
-        },
-        {
-          "seller": "Competitor",
-          "price": 377
-        },
-        {
-          "seller": "Other",
-          "price": 427
-        }
-      ],
-      "history": [
-        {
-          "time": "10:00",
-          "price": 417
-        },
-        {
-          "time": "10:10",
-          "price": 397
-        }
-      ],
-      "alerts": [
-        "Price competition detected"
-      ],
-      "insight": "Undercutting detected",
-      "recommended_price": 392,
-      "confidence": 80,
-      "win_probability": 75
-    },
-    {
-      "asin": "demo123",
+      "asin": "demo1",
       "name": "Ball Bearing 6302 Non Shield Bearing Deep Groove Ball Bearing Dimension 15x42x13",
       "brand": "SKF",
       "your_price": 245,
       "buy_box_winner": "Competitor",
-      "status": "LOST",
+      "status": "LOSE",
       "prices": [
         {
           "seller": "You",
           "price": 245
         },
         {
-          "seller": "Competitor",
-          "price": 225
+          "seller": "Seller1",
+          "price": 230
         },
         {
-          "seller": "Other",
-          "price": 275
-        }
-      ],
-      "history": [
-        {
-          "time": "10:00",
-          "price": 265
+          "seller": "Seller2",
+          "price": 255
         },
         {
-          "time": "10:10",
-          "price": 245
+          "seller": "Seller3",
+          "price": 240
         }
       ],
       "alerts": [
-        "Price competition detected"
+        "\u26a0\ufe0f Undercut by \u20b915",
+        "\ud83d\udd25 High competition"
       ],
-      "insight": "Undercutting detected",
-      "recommended_price": 240,
-      "confidence": 80,
-      "win_probability": 75
+      "insight": "Competitor is cheaper by \u20b915.",
+      "recommended_price": 229,
+      "confidence": 85,
+      "win_probability": 60,
+      "price_gap": 15,
+      "market_position": "Close Competition",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Reduce price",
+      "impact": "Loss of sales"
     },
     {
-      "asin": "demo123",
+      "asin": "demo2",
+      "name": "Pillow Ball Bearing, UCP205",
+      "brand": "SKF",
+      "your_price": 200,
+      "buy_box_winner": "You",
+      "status": "WIN",
+      "prices": [
+        {
+          "seller": "You",
+          "price": 200
+        },
+        {
+          "seller": "Seller1",
+          "price": 210
+        },
+        {
+          "seller": "Seller2",
+          "price": 220
+        },
+        {
+          "seller": "Seller3",
+          "price": 205
+        }
+      ],
+      "alerts": [
+        "\u26a0\ufe0f Very close competition",
+        "\ud83d\udd25 High competition"
+      ],
+      "insight": "You are \u20b95 cheaper than competitors.",
+      "recommended_price": 198,
+      "confidence": 85,
+      "win_probability": 85,
+      "price_gap": -5,
+      "market_position": "Competitive",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Maintain price",
+      "impact": "Higher visibility & conversions"
+    },
+    {
+      "asin": "demo3",
       "name": "Ball Bearing 6305 Non Shield Bearing Deep Groove Ball Bearing Dimension 25x62x17\u2026",
       "brand": "SKF",
       "your_price": 368,
       "buy_box_winner": "Competitor",
-      "status": "LOST",
+      "status": "LOSE",
       "prices": [
         {
           "seller": "You",
           "price": 368
         },
         {
-          "seller": "Competitor",
-          "price": 348
+          "seller": "Seller1",
+          "price": 353
         },
         {
-          "seller": "Other",
-          "price": 398
-        }
-      ],
-      "history": [
-        {
-          "time": "10:00",
-          "price": 388
+          "seller": "Seller2",
+          "price": 378
         },
         {
-          "time": "10:10",
-          "price": 368
+          "seller": "Seller3",
+          "price": 363
         }
       ],
       "alerts": [
-        "Price competition detected"
+        "\u26a0\ufe0f Undercut by \u20b915",
+        "\ud83d\udd25 High competition"
       ],
-      "insight": "Undercutting detected",
-      "recommended_price": 363,
-      "confidence": 80,
-      "win_probability": 75
+      "insight": "Competitor is cheaper by \u20b915.",
+      "recommended_price": 352,
+      "confidence": 85,
+      "win_probability": 60,
+      "price_gap": 15,
+      "market_position": "Close Competition",
+      "reason": "Lowest price wins Buy Box",
+      "strategy": "Reduce price",
+      "impact": "Loss of sales"
     }
   ]
 }
