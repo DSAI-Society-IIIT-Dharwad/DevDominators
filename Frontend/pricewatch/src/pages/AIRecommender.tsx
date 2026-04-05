@@ -1,254 +1,154 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useData } from '@/context/DataContext';
-import { useCountUp } from '@/hooks/useCountUp';
-import { Bot } from 'lucide-react';
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ReferenceLine, Legend, ResponsiveContainer, Tooltip as RTooltip } from 'recharts';
-import Footer from '@/components/Footer';
-import type { Product } from '@/types/data';
+import { useData } from "@/context/DataContext";
+import { useState } from "react";
+import { Brain, TrendingUp } from "lucide-react";
+
+type Product = {
+  asin: string;
+  name: string;
+  brand: string;
+  your_price: number;
+  prices: { seller: string; price: number }[];
+  recommended_price: number;
+  win_probability: number;
+  confidence: number;
+  strategy: string;
+  insight: string;
+};
 
 export default function AIRecommender() {
 
   const { data, loading } = useData();
 
-  const [params] = useSearchParams();
-
-  const products = data?.products ?? [];
-
-  const [selectedAsin, setSelectedAsin] = useState<string>('');
-
-
-  // page title
-  useEffect(() => {
-
-    document.title = 'AI Recommender | PriceWatch Pro';
-
-  }, []);
-
-
-
-  // ⭐ AUTO SELECT PRODUCT FROM ALERT CLICK
-  useEffect(() => {
-
-    const asinFromURL = params.get('asin');
-
-    if (asinFromURL && products.some(p => p.asin === asinFromURL)) {
-
-      setSelectedAsin(asinFromURL);
-
-    }
-
-    else if (products.length && !selectedAsin) {
-
-      setSelectedAsin(products[0].asin);
-
-    }
-
-  }, [params, products, selectedAsin]);
-
-
-
-  const selected =
-
-    products.find(p => p.asin === selectedAsin) ?? null;
-
+  const [selected, setSelected] = useState<Product | null>(null);
 
 
   if (loading)
+    return <div className="p-6">Loading...</div>;
 
-    return (
-
-      <div className="flex-1 p-6">
-
-        <div className="h-96 rounded-xl bg-secondary animate-pulse" />
-
-      </div>
-
-    );
-
+  if (!data)
+    return <div className="p-6 text-red-500">No data found</div>;
 
 
   return (
 
-    <div className="flex-1 flex flex-col min-h-screen">
-
-      <div className="flex-1 p-6 space-y-6">
+    <div className="p-6 space-y-6">
 
 
-        {/* HERO */}
+      {/* HEADER */}
 
-        <div className="rounded-2xl bg-gradient-to-r from-primary/30 to-accent/30 border border-primary/20 p-8">
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-5 rounded-xl flex items-center gap-3 shadow">
 
-          <div className="flex items-center gap-3 mb-2">
-
-            <Bot className="h-8 w-8 text-primary" />
-
-            <h1 className="text-[32px] font-bold text-foreground">
-
-              AI Price Recommender
-
-            </h1>
-
-          </div>
-
-          <p className="text-sm text-muted-foreground max-w-xl">
-
-            Powered by competitive intelligence — get the optimal price to win the Buy Box
-
-          </p>
-
-        </div>
-
-
-
-        {/* PRODUCT SELECTOR */}
+        <Brain className="text-white" size={26} />
 
         <div>
 
-          <h2 className="text-lg font-semibold text-foreground mb-3">
-
-            Select a Product to Analyze
-
-          </h2>
-
-
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-
-            {products.map(p => (
-
-              <button
-
-                key={p.asin}
-
-                onClick={() => setSelectedAsin(p.asin)}
-
-                className={`
-
-                glass-card
-
-                p-4
-
-                text-left
-
-                transition-all
-
-                ${selectedAsin === p.asin
-
-                    ? 'border-primary ring-1 ring-primary/30 bg-primary/[0.06] shadow-[0_0_20px_rgba(59,130,246,0.3)]'
-
-                    : ''}
-
-                `}
-
-              >
-
-
-
-                <Tooltip>
-
-                  <TooltipTrigger asChild>
-
-                    <p className="text-sm font-medium text-foreground truncate">
-
-                      {p.name.length > 45
-
-                        ? p.name.slice(0, 45) + '...'
-
-                        : p.name}
-
-                    </p>
-
-                  </TooltipTrigger>
-
-
-
-                  <TooltipContent>
-
-                    <p className="max-w-xs">{p.name}</p>
-
-                  </TooltipContent>
-
-                </Tooltip>
-
-
-
-                <div className="flex items-center gap-2 mt-1">
-
-                  <span className="rounded-full bg-primary/15 px-2 py-0.5 text-[10px] text-primary">
-
-                    {p.brand}
-
-                  </span>
-
-
-
-                  <span className="font-mono text-sm text-foreground">
-
-                    ₹{p.your_price}
-
-                  </span>
-
-
-
-                  <span
-
-                    className={`
-
-                    rounded-full
-
-                    px-2 py-0.5
-
-                    text-[10px]
-
-                    font-bold
-
-                    ${p.status === 'WIN'
-
-                        ? 'bg-success/15 text-success'
-
-                        : 'bg-destructive/15 text-destructive'}
-
-                    `}
-
-                  >
-
-                    {p.status}
-
-                  </span>
-
-                </div>
-
-
-
-              </button>
-
-            ))}
-
-          </div>
+          <h1 className="text-xl font-bold text-white">
+            AI Price Recommender
+          </h1>
+
+          <p className="text-xs text-gray-200">
+            Smart pricing decision engine
+          </p>
 
         </div>
-
-
-
-        {/* RECOMMENDATION PANEL */}
-
-        {selected &&
-
-          <RecommendationPanel
-
-            product={selected}
-
-          />
-
-        }
 
       </div>
 
 
 
-      <Footer />
+      {/* 2 COLUMN LAYOUT */}
+
+      <div className="grid grid-cols-2 gap-6">
+
+
+        {/* PRODUCT LIST */}
+
+        <div className="space-y-3">
+
+          {data.products.map((p: Product) => {
+
+            const lowest = Math.min(
+              ...p.prices
+                .filter(s => s.seller !== "You")
+                .map(s => s.price)
+            );
+
+            const isLose = p.your_price > lowest;
+
+            return (
+
+              <div
+
+                key={p.asin}
+
+                onClick={() => setSelected(p)}
+
+                className={`
+                  p-3
+                  border
+                  rounded-lg
+                  cursor-pointer
+                  transition
+                  hover:scale-[1.02]
+
+                  ${isLose
+                    ? "bg-red-500/10 border-red-500/40"
+                    : "bg-green-500/10 border-green-500/40"}
+                `}
+              >
+
+                <p className="text-sm font-semibold text-blue-400 truncate">
+
+                  {p.name}
+
+                </p>
+
+                <p className="text-xs mt-1">
+
+                  ₹{p.your_price}
+
+                </p>
+
+
+                <p className={`
+                  text-xs font-bold mt-1
+
+                  ${isLose
+                    ? "text-red-400"
+                    : "text-green-400"}
+                `}>
+
+                  {isLose ? "LOSE" : "WIN"}
+
+                </p>
+
+              </div>
+
+            );
+
+          })}
+
+        </div>
+
+
+
+        {/* RECOMMENDATION CARD */}
+
+        {selected ? (
+
+          <RecommendationPanel product={selected} />
+
+        ) : (
+
+          <div className="flex items-center justify-center border rounded-xl text-gray-400">
+
+            Select a product to view recommendation
+
+          </div>
+
+        )}
+
+      </div>
 
     </div>
 
@@ -258,11 +158,11 @@ export default function AIRecommender() {
 
 
 
-/* ============================= */
+/* ========================== */
 
 function RecommendationPanel({
 
-  product: p
+  product
 
 }: {
 
@@ -271,208 +171,202 @@ function RecommendationPanel({
 }) {
 
 
-
-  const compPrices =
-
-    p.prices.filter(
-
-      s => s.seller !== 'You'
-
+  const competitorPrices =
+    product.prices.filter(
+      s => s.seller !== "You"
     );
 
 
-
-  const minComp = Math.min(
-
-    ...compPrices.map(
-
-      s => s.price
-
-    )
-
-  );
-
-
-
-  const recPrice =
-
-    useCountUp(
-
-      p.recommended_price,
-
-      600,
-
-      '₹'
-
+  const lowestCompetitor =
+    Math.min(
+      ...competitorPrices.map(
+        s => s.price
+      )
     );
 
 
-
-  const posColor =
-
-    p.market_position === 'Competitive'
-
-      ? 'bg-success/15 text-success'
-
-      : p.market_position === 'Close Competition'
-
-        ? 'bg-warning/15 text-warning'
-
-        : 'bg-destructive/15 text-destructive';
-
-
-
-  const wpColor =
-
-    p.win_probability >= 70
-
-      ? 'text-success'
-
-      : p.win_probability >= 40
-
-        ? 'text-warning'
-
-        : 'text-destructive';
-
-
-
-  const wpStroke =
-
-    p.win_probability >= 70
-
-      ? '#10B981'
-
-      : p.win_probability >= 40
-
-        ? '#F59E0B'
-
-        : '#EF4444';
-
-
-
-  const gapColor =
-
-    p.price_gap < 0
-
-      ? 'text-success'
-
-      : 'text-destructive';
-
-
-
-  const maxPrice = Math.max(
-
-    ...p.prices.map(
-
-      s => s.price
-
-    )
-
-  );
-
-
-
-  // chart data
-  const days = [
-
-    'Mon',
-
-    'Tue',
-
-    'Wed',
-
-    'Thu',
-
-    'Fri',
-
-    'Sat',
-
-    'Sun'
-
-  ];
-
-
-
-  const chartData = useMemo(() => {
-
-    return days.map((d, i) => {
-
-      const row: Record<string, string | number> = {
-
-        day: d
-
-      };
-
-
-
-      p.prices.forEach(s => {
-
-        const variance =
-
-          s.seller === 'You'
-
-            ? 5
-
-            : 8;
-
-
-
-        row[s.seller] =
-
-          s.price +
-
-          Math.round(
-
-            Math.sin(
-
-              i * 1.2 +
-
-              p.prices.indexOf(s)
-
-            ) * variance
-
-          );
-
-      });
-
-
-
-      return row;
-
-    });
-
-  }, [p]);
-
-
-
-  const circumference =
-
-    2 * Math.PI * 36;
-
-
-
-  const dashOffset =
-
-    circumference -
-
-    (p.win_probability / 100)
-
-    * circumference;
-
+  const isLose =
+    product.your_price > lowestCompetitor;
+
+
+  const maxPrice =
+    Math.max(
+      ...product.prices.map(
+        s => s.price
+      )
+    );
 
 
   return (
 
-    <div className="space-y-6 animate-fade-slide-up">
+    <div className="p-4 rounded-xl border bg-gradient-to-br from-[#0b1220] to-[#020617] space-y-3 shadow max-h-[70vh] overflow-y-auto">
 
 
-      {/* same UI as before */}
+      {/* PRODUCT */}
 
-      {/* NOTHING CHANGED BELOW */}
+      <div>
+
+        <p className="text-sm text-blue-400 font-semibold truncate">
+
+          {product.name}
+
+        </p>
+
+      </div>
 
 
-      {/* existing UI continues exactly same */}
 
+      {/* RECOMMENDED PRICE */}
+
+      <div className={`
+        p-3 rounded-lg border
+
+        ${isLose
+          ? "bg-red-500/10 border-red-500/30"
+          : "bg-green-500/10 border-green-500/30"}
+      `}>
+
+        <p className="text-xs text-gray-400">
+          Recommended Price
+        </p>
+
+        <p className={`
+          text-2xl font-bold
+
+          ${isLose
+            ? "text-red-400"
+            : "text-green-400"}
+        `}>
+
+          ₹{product.recommended_price}
+
+        </p>
+
+      </div>
+
+
+
+      {/* PRICE BARS */}
+
+      <div>
+
+        <p className="text-xs mb-1 flex items-center gap-1">
+
+          <TrendingUp size={12} />
+
+          Competitor Prices
+
+        </p>
+
+
+        {product.prices.map(s => {
+
+          const width =
+            (s.price / maxPrice) * 100;
+
+          const cheaper =
+            s.price < product.your_price;
+
+          const isYou =
+            s.seller === "You";
+
+
+          return (
+
+            <div key={s.seller} className="mb-1">
+
+              <div className="flex justify-between text-xs">
+
+                <span>
+                  {s.seller}
+                </span>
+
+                <span>
+                  ₹{s.price}
+                </span>
+
+              </div>
+
+
+              <div className="h-2 bg-gray-700 rounded">
+
+                <div
+                  className={`
+                    h-2 rounded
+
+                    ${isYou
+                      ? "bg-blue-500"
+                      : cheaper
+                        ? "bg-red-500"
+                        : "bg-gray-400"}
+                  `}
+                  style={{
+                    width: `${width}%`
+                  }}
+                />
+
+              </div>
+
+            </div>
+
+          );
+
+        })}
+
+      </div>
+
+
+
+      {/* METRICS */}
+
+      <div className="grid grid-cols-2 gap-2 text-xs">
+
+        <div className="p-2 bg-gray-800 rounded">
+
+          Win:
+
+          <span className="ml-1 text-green-400 font-bold">
+
+            {product.win_probability}%
+
+          </span>
+
+        </div>
+
+
+        <div className="p-2 bg-gray-800 rounded">
+
+          Confidence:
+
+          <span className="ml-1 text-blue-400 font-bold">
+
+            {product.confidence}%
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      {/* STRATEGY */}
+
+      <div className="p-2 bg-gray-800 rounded text-xs">
+
+        <b>Strategy:</b> {product.strategy}
+
+      </div>
+
+
+
+      {/* INSIGHT */}
+
+      <div className="p-2 bg-gray-800 rounded text-xs text-gray-300">
+
+        {product.insight}
+
+      </div>
 
 
     </div>
