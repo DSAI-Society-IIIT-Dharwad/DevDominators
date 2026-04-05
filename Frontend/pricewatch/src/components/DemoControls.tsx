@@ -49,16 +49,16 @@ export function DemoControls() {
         position: "fixed",
 
         /* CHANGED HERE */
-        bottom: "20px",     // distance from bottom
-        left: "50%",        // center horizontally
-        transform: "translateX(-50%)",
+        bottom: "100px",     // distance from bottom
+        left: "0%",        // center horizontally
+        transform: "none",
 
         background: "#0b1220",
         border: "1px solid #1f2937",
         borderRadius: "14px",
-        padding: "20px",
+        padding: "18px",
         zIndex: 9999,
-        minWidth: "260px",
+        minWidth: "220px",
         boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
         textAlign: "center"
       }}
