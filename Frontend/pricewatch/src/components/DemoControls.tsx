@@ -1,73 +1,99 @@
 // src/components/DemoControls.tsx
-// REPLACE ENTIRE FILE
 
 import { useState } from "react";
 import { useData } from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
 
 export function DemoControls() {
+
   const { triggerAlert, resetDemo } = useData();
+  const navigate = useNavigate();
+
   const [status, setStatus]   = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleTrigger = async () => {
+
     setLoading(true);
-    setStatus("Simulating...");
+    setStatus("Simulating competitor price drop...");
+
     await triggerAlert();
-    setStatus("Alert triggered! Check dashboard.");
+
+    setStatus("Redirecting to Alerts page 🔔");
+
     setLoading(false);
-    setTimeout(() => setStatus(""), 4000);
+
+    setTimeout(() => {
+      navigate("/alerts");
+    }, 1200);
   };
 
   const handleReset = async () => {
+
     setLoading(true);
-    setStatus("Resetting...");
+    setStatus("Resetting demo data...");
+
     await resetDemo();
-    setStatus("Reset complete!");
+
+    setStatus("Demo reset complete ✅");
     setLoading(false);
+
     setTimeout(() => setStatus(""), 3000);
+
   };
 
   return (
-    <div style={{
-      position:     "fixed",
-      bottom:       "24px",
-      right:        "24px",
-      background:   "#111827",
-      border:       "1px solid #374151",
-      borderRadius: "12px",
-      padding:      "16px",
-      zIndex:       9999,
-      minWidth:     "220px",
-      boxShadow:    "0 4px 24px rgba(0,0,0,0.5)"
-    }}>
-      <p style={{
-        color:          "#6B7280",
-        fontSize:       "10px",
-        textTransform:  "uppercase",
-        letterSpacing:  "1px",
-        marginBottom:   "10px",
-        fontWeight:     "600"
-      }}>
-        🎮 Demo Controls
+
+    <div 
+      style={{
+        position: "fixed",
+
+        /* CHANGED HERE */
+        bottom: "20px",     // distance from bottom
+        left: "50%",        // center horizontally
+        transform: "translateX(-50%)",
+
+        background: "#0b1220",
+        border: "1px solid #1f2937",
+        borderRadius: "14px",
+        padding: "20px",
+        zIndex: 9999,
+        minWidth: "260px",
+        boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+        textAlign: "center"
+      }}
+    >
+
+      <p
+        style={{
+          color: "#9CA3AF",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
+          marginBottom: "12px",
+          fontWeight: "600"
+        }}
+      >
+        🎮 DEMO CONTROLS
       </p>
 
       <button
         onClick={handleTrigger}
         disabled={loading}
         style={{
-          display:       "block",
-          width:         "100%",
-          background:    loading ? "#7f1d1d" : "#EF4444",
-          color:         "white",
-          padding:       "9px 0",
-          borderRadius:  "8px",
-          border:        "none",
-          cursor:        loading ? "wait" : "pointer",
-          marginBottom:  "8px",
-          fontWeight:    "bold",
-          fontSize:      "13px",
-          transition:    "background 0.2s"
-        }}>
+          display: "block",
+          width: "100%",
+          background: loading ? "#7f1d1d" : "#ef4444",
+          color: "white",
+          padding: "10px",
+          borderRadius: "8px",
+          border: "none",
+          cursor: loading ? "wait" : "pointer",
+          marginBottom: "10px",
+          fontWeight: "bold",
+          fontSize: "13px"
+        }}
+      >
         🚨 Simulate Competitor Alert
       </button>
 
@@ -75,32 +101,35 @@ export function DemoControls() {
         onClick={handleReset}
         disabled={loading}
         style={{
-          display:      "block",
-          width:        "100%",
-          background:   loading ? "#064e3b" : "#10B981",
-          color:        "white",
-          padding:      "9px 0",
+          display: "block",
+          width: "100%",
+          background: loading ? "#064e3b" : "#10b981",
+          color: "white",
+          padding: "10px",
           borderRadius: "8px",
-          border:       "none",
-          cursor:       loading ? "wait" : "pointer",
-          fontWeight:   "bold",
-          fontSize:     "13px",
-          transition:   "background 0.2s"
-        }}>
+          border: "none",
+          cursor: loading ? "wait" : "pointer",
+          fontWeight: "bold",
+          fontSize: "13px"
+        }}
+      >
         ✅ Reset Demo
       </button>
 
       {status && (
-        <p style={{
-          color:      "#F9FAFB",
-          fontSize:   "11px",
-          marginTop:  "10px",
-          lineHeight: "1.5",
-          textAlign:  "center"
-        }}>
+        <p
+          style={{
+            color: "#e5e7eb",
+            fontSize: "12px",
+            marginTop: "12px",
+            lineHeight: "1.4"
+          }}
+        >
           {status}
         </p>
       )}
+
     </div>
+
   );
 }

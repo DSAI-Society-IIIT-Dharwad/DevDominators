@@ -84,29 +84,6 @@ export default function AppSidebar() {
 
             <span>{item.label}</span>
 
-
-            {/* alert badge */}
-
-            {item.label === 'Alerts' && alertCount > 0 && (
-
-              <span
-
-                className="absolute right-3 flex h-5 min-w-[20px]
-
-                items-center justify-center rounded-full
-
-                bg-destructive text-[10px] font-bold
-
-                text-destructive-foreground animate-pulse-ring"
-
-              >
-
-                {alertCount}
-
-              </span>
-
-            )}
-
           </NavLink>
 
         ))}

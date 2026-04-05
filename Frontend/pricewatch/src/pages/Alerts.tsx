@@ -15,6 +15,31 @@ if(!data || !data.products)
 return <div className="p-6 text-white">No alerts data</div>
 
 
+/* built-in notification sound */
+const playAlertSound = () => {
+
+  const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)()
+
+  const oscillator = audioCtx.createOscillator()
+  const gainNode = audioCtx.createGain()
+
+  oscillator.type = "sine"
+  oscillator.frequency.value = 880   // sound pitch
+
+  gainNode.gain.value = 0.15         // volume
+
+  oscillator.connect(gainNode)
+  gainNode.connect(audioCtx.destination)
+
+  oscillator.start()
+
+  setTimeout(()=>{
+    oscillator.stop()
+  },180)
+
+}
+
+
 return(
 
 <div className="p-6 space-y-6">
@@ -34,12 +59,9 @@ Alerts
 
 
 
-<div className="grid grid-cols-2 gap-6">
+{/* ALERT LIST */}
 
-
-{/* LEFT SIDE ALERT LIST */}
-
-<div className="space-y-3">
+<div className="space-y-3 max-w-xl">
 
 {data.products.map((p:any)=>{
 
@@ -51,7 +73,19 @@ return(
 
 key={p.asin}
 
-onClick={()=>setSelected(p)}
+onClick={()=>{
+
+setSelected(p)
+
+/* play sound */
+playAlertSound()
+
+/* auto close popup */
+setTimeout(()=>{
+setSelected(null)
+},4000)
+
+}}
 
 className={`
 
@@ -59,10 +93,11 @@ p-3
 rounded-lg
 border
 cursor-pointer
+transition
 
 ${isLose
-?"border-red-500 bg-red-500/10"
-:"border-green-500 bg-green-500/10"}
+?"border-red-500 bg-red-500/10 hover:bg-red-500/20"
+:"border-green-500 bg-green-500/10 hover:bg-green-500/20"}
 
 `}
 >
@@ -106,128 +141,76 @@ ${isLose
 
 
 
-{/* RIGHT SIDE RECOMMENDER */}
+{/* POPUP */}
 
 {selected && (
 
-<div className="p-4 rounded-xl border bg-[#0b1220] space-y-3">
+<div
+
+className="fixed right-6 bottom-6 w-80 p-4 rounded-xl border
+bg-[#0b1220] shadow-2xl z-50"
+
+>
+
+<p className="text-xs text-gray-400 mb-1">
+🔔 ALERT NOTIFICATION
+</p>
 
 
-<p className="text-blue-400 font-semibold">
+<p className="text-sm font-semibold text-blue-400">
 
 {selected.name}
 
 </p>
 
 
+<p className={`
 
-<div className="p-3 rounded bg-green-500/10">
+text-xs font-bold mt-1
 
-<p className="text-xs">
-Recommended Price
+${selected.status==="LOSE"
+?"text-red-400"
+:"text-green-400"}
+
+`}>
+
+{selected.status}
+
 </p>
 
-<p className="text-xl font-bold text-green-400">
+
+<p className="text-lg font-bold text-yellow-400 mt-1">
 
 ₹{selected.recommended_price}
 
 </p>
 
-</div>
+
+<p className="text-xs text-gray-400 mt-2">
+
+{selected.status==="LOSE"
+?"Competitor price dropped. Adjust price to stay competitive."
+:"Your price is competitive. Keep current price."}
+
+</p>
 
 
+<button
 
-{/* price comparison */}
+onClick={()=>setSelected(null)}
 
-{selected.prices?.map((s:any)=>{
-
-const maxPrice=Math.max(
-...selected.prices.map((x:any)=>x.price)
-)
-
-const width=(s.price/maxPrice)*100
-
-return(
-
-<div key={s.seller}>
-
-<div className="flex justify-between text-xs">
-
-<span>{s.seller}</span>
-
-<span>₹{s.price}</span>
-
-</div>
-
-<div className="h-2 bg-gray-700 rounded">
-
-<div
-
-className={`
-
-h-2 rounded
-
-${s.seller==="You"
-?"bg-blue-500"
-:"bg-gray-400"}
-
-`}
-
-style={{width:`${width}%`}}
+className="mt-3 text-xs text-blue-400 hover:underline"
 
 >
 
-</div>
+Close
 
-</div>
-
-</div>
-
-)
-
-})}
-
-
-
-<p className="text-xs">
-
-Win probability:
-
-<span className="text-green-400 ml-1">
-
-{selected.win_probability || 0}%
-
-</span>
-
-</p>
-
-
-<p className="text-xs">
-
-Strategy:
-
-<span className="text-blue-400 ml-1">
-
-{selected.strategy || "Maintain price"}
-
-</span>
-
-</p>
-
-
-<p className="text-xs text-gray-400">
-
-{selected.insight || ""}
-
-</p>
+</button>
 
 
 </div>
 
 )}
-
-
-</div>
 
 
 </div>
